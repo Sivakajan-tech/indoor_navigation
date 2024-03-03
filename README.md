@@ -21,8 +21,14 @@ cd indoor_navigation
 npm install
 ```
    
-4. art the React Native bundler by running
+4. Start the React Native bundler by running
 ```
 npx react-native start
 ```
 You can now proceed with building and running the application on your emulator or connected device using your preferred IDE.
+
+
+## Contribute
+
+# Lint Checker.
+You need to ensure the `npm run lint` does not have any errors or warnings. You can easily omit this by running `npx eslint --fix`
