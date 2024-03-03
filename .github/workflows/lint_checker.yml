@@ -9,26 +9,22 @@ on:
          - main
 
 jobs:
-   lint:
+   linting-check:
       name: Lint TS (eslint, prettier)
       runs-on: ubuntu-latest
 
       steps:
          - name: 📦 Check out Git repository
            uses: actions/checkout@v3
-           with:
-              fetch-depth: 0
 
          - name: 📦 Set up Node.js
            uses: actions/setup-node@v1
            with:
-              node-version: 12
+              node-version: 20
 
          - name: 🏃‍♂️ Install Node.js dependencies
            run: npm install
 
-         - name: 🏃‍♂️ Run ESLint PR
-           uses: wearerequired/lint-action@v2
-           with:
-              eslint: true
-              prettier: true
+         - name: 🏃‍♂️Run ESLint PR
+           run: npm run lint
+
