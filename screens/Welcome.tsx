@@ -16,7 +16,7 @@ const Welcome: React.FC = () => {
         <View style={styles.container}>
           <View style={styles.imageContainer}>
             <Image
-              source={require("../assets/GPS-navigation-apps-2.png")} // Replace with your image path
+              source={require("../assets/GPS-navigation-apps-2.png")}
               style={styles.image}
             />
           </View>
