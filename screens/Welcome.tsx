@@ -4,7 +4,10 @@ import {View, Text, Button, Image, StyleSheet, Dimensions} from 'react-native';
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 
-const Welcome: React.FC = () => {
+const Welcome: React.FC = ({navigation}) => {
+   const handleWelcomeButtonClick = () => {
+      navigation.navigate('MainMap');
+   };
    return (
       <View style={styles.container}>
          <View style={styles.imageContainer}>
@@ -21,8 +24,9 @@ const Welcome: React.FC = () => {
             </Text>
             <View style={styles.styleLoginBtn}>
                <Button
-                  color="#e6a881" //button colorx
+                  color="#e6a881"
                   title="Let's start"
+                  onPress={handleWelcomeButtonClick}
                />
             </View>
          </View>
@@ -33,7 +37,7 @@ const Welcome: React.FC = () => {
 const styles = StyleSheet.create({
    container: {
       flex: 1,
-      backgroundColor: '#9d54bf', // Change to your desired purple color
+      backgroundColor: '#9d54bf',
    },
    imageContainer: {
       flex: 1,
@@ -41,8 +45,8 @@ const styles = StyleSheet.create({
    },
    image: {
       width: windowWidth,
-      height: windowHeight * 0.5, // Adjust image height as needed
-      resizeMode: 'cover', // Resize image to fit container
+      height: windowHeight * 0.5,
+      resizeMode: 'cover',
    },
    contentContainer: {
       position: 'absolute',
