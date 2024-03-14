@@ -31,7 +31,7 @@ You can now proceed with building and running the application on your emulator o
 ## Contribute
 
 ### Lint Checker.
-You need to ensure the `npm run lint` does not have any errors or warnings. You can easily omit this by running `npx eslint --fix`
+You need to ensure the `npm run lint .` does not have any errors or warnings. You can easily omit this by running `npx eslint . --fix`
 
 ## Contributors
 * Sivakajan Sivaparan
