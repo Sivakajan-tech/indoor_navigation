@@ -6,6 +6,7 @@ import Welcome from './screens/Welcome';
 
 const Stack = createStackNavigator();
 const App = () => {
+
    return (
       <NavigationContainer>
          <Stack.Navigator initialRouteName="Welcome">
@@ -20,6 +21,7 @@ const App = () => {
          </Stack.Navigator>
       </NavigationContainer>
    );
+   
 };
 
 export default App;
