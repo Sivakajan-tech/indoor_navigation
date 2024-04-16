@@ -26,7 +26,7 @@ const MainMap = () => {
    return (
       <View style={styles.container}>
          <Image
-            source={require('/Users/sivakajan/Semester 8/CS4472 Mobile Computing/indoor_navigation/assets/GPS-navigation-apps-2.png')}
+            source={require('../assets/GPS-navigation-apps-2.png')}
             style={[styles.mapImage, {transform: [{scale: zoomLevel}]}]}
             resizeMode="contain"
          />
