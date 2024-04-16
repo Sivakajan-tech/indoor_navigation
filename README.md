@@ -35,3 +35,5 @@ You need to ensure the `npm run lint` does not have any errors or warnings. You 
 
 ## Contributors
 * Sivakajan Sivaparan
+* Tharsha Sivapalarajah
+* Shanmugavadivel Gopinath
