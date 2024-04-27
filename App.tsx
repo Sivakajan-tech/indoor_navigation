@@ -4,7 +4,6 @@ import { createStackNavigator } from '@react-navigation/stack';
 
 import Welcome from './screens/Welcome';
 import MainMap from './screens/MainMap';
-
 import AdminLogin from './screens/Admin/AdminLogin';
 import AdminDashboard from './screens/Admin/AdminDashboard';
 import AdminCreate from './screens/Admin/AdminCreate';
