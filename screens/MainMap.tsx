@@ -9,9 +9,30 @@ import {View, Image, StyleSheet, PanResponder,Dimensions} from 'react-native';
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height - 64;
 
-
 const MainMap = () => {
-   const [markerPosition, setMarkerPosition] = useState({x: 0, y: 0});
+   const calculateGridNumber = (squareId: number) => {
+      const rows = 37; // Number of rows
+      const columns = 21; // Number of columns
+      const squareSize = 17; // Size of each square
+
+      // Get the row position (1-based)
+      const row = Math.ceil(squareId / columns);
+
+      // Calculate horizontal length (distance from top left corner)
+      const horizontalLength = (rows - row) * squareSize;
+      const verticalLength = (squareId % columns === 0) ? (columns - 1) * 10 : ((squareId % columns) - 1) * squareSize;
+
+      // Return both horizontalLength and verticalLength as an array
+      return [horizontalLength, verticalLength];
+   };
+
+   // Call the function
+   const [horizontalLength, verticalLength] = calculateGridNumber(568);
+   const topOutterMap = 42;
+   const mapTopMargin = 31;
+   const mapLeftMargin = 20;
+   
+   const [markerPosition, setMarkerPosition] = useState({ x: mapLeftMargin + verticalLength + 8, y: topOutterMap + mapTopMargin + horizontalLength + 8 });
    const [zoomLevel, setZoomLevel] = useState(1);
 
    const graphJsonInput = useMemo(() => {
@@ -62,6 +83,7 @@ const MainMap = () => {
    const panResponder = PanResponder.create({
       onStartShouldSetPanResponder: () => true,
       onPanResponderMove: (event, gesture) => {
+         console.log('Gesture:', gesture);
          // Handle panning
          setMarkerPosition({
             x: markerPosition.x + gesture.dx,
@@ -81,14 +103,14 @@ const MainMap = () => {
       <View style={styles.container}>
          <Image
             source={require('../assets/FloorPlan.jpg')}
-            style={[styles.mapImage, {transform: [{scale: zoomLevel}]}]}
+            style={[styles.mapImage, { transform: [{ scale: zoomLevel }] }]}
             resizeMode="contain"
          />
          {/* Draggable Marker */}
          <View
             style={[
                styles.marker,
-               {left: markerPosition.x, top: markerPosition.y},
+               { left: markerPosition.x, top: markerPosition.y },
             ]}
             {...panResponder.panHandlers}
          />
@@ -109,8 +131,8 @@ const styles = StyleSheet.create({
       position: 'absolute',
    },
    marker: {
-      width: 15,
-      height: 15,
+      width: 5,
+      height: 5,
       borderRadius: 10,
       backgroundColor: 'red',
       position: 'absolute',
