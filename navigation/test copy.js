@@ -13,15 +13,15 @@ const indexes = [
 async function getLocationPrediction(currentWifiStrengths) {
   try {
     const sizel = test_data.length;
-    
-    const train_data_set = test_data;
-    // console.log(
-    //   'train_data_set =',
-    //   indexes.map(index => currentWifiStrengths[index]),
-    // );
+
+    const train_data_set = indexes.map(index => test_data[index]);
+    console.log(
+      'train_data_set =',
+      indexes.map(index => currentWifiStrengths[index]),
+    );
     // .slice(3, size)
     // .map(item => item.slice(colStart, noOfCols));
-    // const train_data_labels = indexes.map(index => test_labels[index]);
+    const train_data_labels = indexes.map(index => test_labels[index]);
     // .map(item => item.slice(colStart, noOfCols));
 
     // const test_data_set = test_data
@@ -30,9 +30,9 @@ async function getLocationPrediction(currentWifiStrengths) {
 
     // const test_data_labels = test_labels.slice(colStart, 3);
 
-    var knn = new KNN(train_data_set, test_labels, {k: 3}); // consider 2 nearest neighbors
+    var knn = new KNN(train_data_set, train_data_labels, {k: 5}); // consider 2 nearest neighbors
 
-    var ans = knn.predict(currentWifiStrengths);
+    var ans = knn.predict(indexes.map(index => currentWifiStrengths[index]));
     console.log('ans =', ans);
     return ans;
   } catch (e) {
