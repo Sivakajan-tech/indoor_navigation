@@ -26,7 +26,7 @@ const MainMap = () => {
    return (
       <View style={styles.container}>
          <Image
-            source={require('../assets/GPS-navigation-apps-2.png')}
+            source={require('../assets/FloorPlan.jpg')}
             style={[styles.mapImage, {transform: [{scale: zoomLevel}]}]}
             resizeMode="contain"
          />
@@ -47,6 +47,7 @@ const styles = StyleSheet.create({
       flex: 1,
       justifyContent: 'center',
       alignItems: 'center',
+      backgroundColor: '#FFD1E3',
    },
    mapImage: {
       width: '100%',
@@ -54,8 +55,8 @@ const styles = StyleSheet.create({
       position: 'absolute',
    },
    marker: {
-      width: 20,
-      height: 20,
+      width: 15,
+      height: 15,
       borderRadius: 10,
       backgroundColor: 'red',
       position: 'absolute',
