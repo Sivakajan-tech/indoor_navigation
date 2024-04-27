@@ -70,6 +70,7 @@ const styles = StyleSheet.create({
       fontSize: 16,
       fontWeight: 'bold',
       color: '#000',
+      backgroundColor: '#9d54bf',
    },
    imageContainer: {
       flex: 1,
