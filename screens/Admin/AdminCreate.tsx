@@ -1,5 +1,12 @@
 import React from 'react';
-import { View, Text, TextInput, StyleSheet, Dimensions, TouchableOpacity } from 'react-native';
+import {
+   View,
+   Text,
+   TextInput,
+   StyleSheet,
+   Dimensions,
+   TouchableOpacity,
+} from 'react-native';
 
 const windowWidth = Dimensions.get('window').width;
 
@@ -17,11 +24,11 @@ const AdminCreate: React.FC = () => {
             </View>
          </View>
          <View style={styles.inputContainer}>
-            <Text style={styles.inputLabel}>Coordinates</Text>
+            <Text style={styles.inputLabel}>Grid</Text>
             <View style={styles.inputBox}>
                <TextInput
                   style={styles.input}
-                  placeholder="Enter the coordinates of the reference point..."
+                  placeholder="Enter the grid of the reference point..."
                />
             </View>
          </View>

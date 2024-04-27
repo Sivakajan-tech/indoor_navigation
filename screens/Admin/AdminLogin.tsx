@@ -1,11 +1,19 @@
-import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableWithoutFeedback, StyleSheet, Dimensions, Alert } from 'react-native';
-import { TouchableOpacity } from 'react-native-gesture-handler';
-import { BackHandler } from 'react-native';
+import React, {useState} from 'react';
+import {
+   View,
+   Text,
+   TextInput,
+   TouchableWithoutFeedback,
+   StyleSheet,
+   Dimensions,
+   Alert,
+} from 'react-native';
+import {TouchableOpacity} from 'react-native-gesture-handler';
+import {BackHandler} from 'react-native';
 
 const windowWidth = Dimensions.get('window').width;
 
-const AdminLogin: React.FC = ({ navigation }) => {
+const AdminLogin: React.FC = ({navigation}) => {
    const [username, setUsername] = useState('');
    const [password, setPassword] = useState('');
    const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -18,10 +26,8 @@ const AdminLogin: React.FC = ({ navigation }) => {
          Alert.alert(
             'Error',
             'Invalid username or password',
-            [
-               { text: 'OK', onPress: () => console.log('OK Pressed') }
-            ],
-            { cancelable: false }
+            [{text: 'OK', onPress: () => console.log('OK Pressed')}],
+            {cancelable: false},
          );
       }
    };
@@ -32,10 +38,14 @@ const AdminLogin: React.FC = ({ navigation }) => {
          'Confirm',
          'Are you sure you want to Return to the Home Page ?',
          [
-            { text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel' },
-            { text: 'OK', onPress: () => navigation.navigate('Welcome') },
+            {
+               text: 'Cancel',
+               onPress: () => console.log('Cancel Pressed'),
+               style: 'cancel',
+            },
+            {text: 'OK', onPress: () => navigation.navigate('Welcome')},
          ],
-         { cancelable: false }
+         {cancelable: false},
       );
    };
 
@@ -45,25 +55,35 @@ const AdminLogin: React.FC = ({ navigation }) => {
          'Confirm',
          'Are you sure you want to Exit the Application ?',
          [
-            { text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel' },
-            { text: 'OK', onPress: () => BackHandler.exitApp() },
+            {
+               text: 'Cancel',
+               onPress: () => console.log('Cancel Pressed'),
+               style: 'cancel',
+            },
+            {text: 'OK', onPress: () => BackHandler.exitApp()},
          ],
-         { cancelable: false }
+         {cancelable: false},
       );
    };
 
    return (
       <View style={styles.container}>
          <View style={styles.menuContainer}>
-            <TouchableOpacity style={styles.menuButton} onPress={() => setIsMenuOpen(!isMenuOpen)}>
+            <TouchableOpacity
+               style={styles.menuButton}
+               onPress={() => setIsMenuOpen(!isMenuOpen)}>
                <Text style={styles.menuButtonText}>Menu</Text>
             </TouchableOpacity>
             {isMenuOpen && (
                <View style={styles.menu}>
-                  <TouchableOpacity style={styles.menuOption} onPress={handleNavigateHome}>
+                  <TouchableOpacity
+                     style={styles.menuOption}
+                     onPress={handleNavigateHome}>
                      <Text style={styles.menuOptionText}>Home</Text>
                   </TouchableOpacity>
-                  <TouchableOpacity style={styles.menuOption} onPress={handleExitApp}>
+                  <TouchableOpacity
+                     style={styles.menuOption}
+                     onPress={handleExitApp}>
                      <Text style={styles.menuOptionText}>Exit</Text>
                   </TouchableOpacity>
                </View>
