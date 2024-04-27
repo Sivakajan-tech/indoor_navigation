@@ -13,6 +13,7 @@
     "@react-navigation/native": "^6.1.14",
     "@react-navigation/native-stack": "^6.9.22",
     "@react-navigation/stack": "^6.3.25",
+    "ml-knn": "^3.0.0",
     "ngraph.fromjson": "^3.1.0",
     "ngraph.tojson": "^1.2.0",
     "react": "18.2.0",
