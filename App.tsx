@@ -58,9 +58,6 @@ const App = () => {
             <Stack.Screen
                name="AdminDelete"
                component={AdminDelete}
-               options={{
-                  headerShown: false,
-               }}
             />
             <Stack.Screen
                name="DataCollectorScreen"
