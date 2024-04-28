@@ -4,7 +4,7 @@ import { getLocationPrediction } from '../navigation/GetLocationPrediction'
 import { getWifiStrengths } from '../navigation/wifiRefinedInputUtil'
 import { accelerometer } from 'react-native-sensors';
 import { setUpdateIntervalForType, SensorTypes } from "react-native-sensors";
-import { View, Image, StyleSheet, Dimensions, Pressable, Text } from 'react-native';
+import { View, Image, StyleSheet, Dimensions, Pressable, Text, Share } from 'react-native';
 
 setUpdateIntervalForType(SensorTypes.accelerometer, 100);
 setUpdateIntervalForType(SensorTypes.gyroscope, 100);
@@ -23,6 +23,12 @@ const MainMap = () => {
       const [x, y] = [event.nativeEvent.locationX, event.nativeEvent.locationY];
       const newCircle = { x, y };
       setCircles([...circles, newCircle]);
+   };
+
+   const shareInput = (gridID) => () => {
+      Share.share({
+         message: "pocketpath://mainmap?gridID=" + gridID,
+      });
    };
 
    const resetCircle = () => {
@@ -113,9 +119,14 @@ const MainMap = () => {
 
    return (
       <View style={styles.container}>
-         <Pressable onPress={resetCircle} style={styles.resetButton}>
-            <Text style={styles.resetText}>Reset</Text>
-         </Pressable>
+         <View style={{ position: 'absolute', top:2,right:2}} >
+            <Pressable onPress={shareInput(gridID)} style={styles.shareButton}>
+               <Text style={styles.shareText}>Share</Text>
+            </Pressable>
+            <Pressable onPress={resetCircle} style={styles.resetButton}>
+               <Text style={styles.resetText}>Reset</Text>
+            </Pressable>
+         </View>
          <Pressable onPress={(evt) => addCircle(evt)} style={styles.mapImage}>
             <Image
                source={require('../assets/FloorPlan.jpg')}
@@ -155,14 +166,14 @@ const styles = StyleSheet.create({
       position: 'absolute',
       top: 20,
       right: 20,
-      padding: 10,
+      padding: 8,
       backgroundColor: 'lightblue',
       borderRadius: 5,
-      marginTop: -20,
+      marginTop: -10,
       zIndex: 1,
    },
    resetText: {
-      fontSize: 16,
+      fontSize: 10,
       color: 'white',
    },
    mapImage: {
@@ -184,6 +195,21 @@ const styles = StyleSheet.create({
       borderRadius: 10,
       backgroundColor: 'red',
       position: 'absolute',
+   },
+   shareButton: {
+      position: 'absolute',
+      top: 20,
+      right: 20,
+      padding: 8,
+      backgroundColor: 'lightgreen',
+      borderRadius: 5,
+      zIndex: 1,
+      marginEnd:50,
+      marginVertical:-10
+   },
+   shareText: {
+      fontSize: 10,
+      color: 'white',
    },
 });
 
