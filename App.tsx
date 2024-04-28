@@ -25,24 +25,58 @@ const App = () => {
     },
   };
   return (
-    <NavigationContainer linking={linking}>
-      <Stack.Navigator initialRouteName="Welcome">
-        <Stack.Screen
-          name="Welcome"
-          component={Welcome}
-          options={{
-            headerShown: false,
-          }}
-        />
-        <Stack.Screen
-          name="MainMap"
-          component={MainMap}
-          options={{
-            headerShown: false,
-          }}
-        />
-      </Stack.Navigator>
-    </NavigationContainer>
+    <NavigationContainer>
+         <Stack.Navigator initialRouteName="Welcome">
+            <Stack.Screen
+               name="Welcome"
+               component={Welcome}
+               options={{
+                  headerShown: false,
+               }}
+            />
+            <Stack.Screen
+               name="MainMap"
+               component={MainMap}
+               options={{
+                  headerShown: false,
+               }}
+            />
+            <Stack.Screen
+               name="AdminLogin"
+               component={AdminLogin}
+               options={{
+                  headerShown: false,
+               }}
+            />
+            <Stack.Screen
+               name="AdminDashboard"
+               component={AdminDashboard}
+            />
+            <Stack.Screen
+               name="AdminCreate"
+               component={AdminCreate}
+            />
+            <Stack.Screen
+               name="AdminView"
+               component={AdminView}
+            />
+            <Stack.Screen
+               name="AdminUpdate"
+               component={AdminUpdate}
+            />
+            <Stack.Screen
+               name="AdminDelete"
+               component={AdminDelete}
+            />
+            <Stack.Screen
+               name="DataCollectorScreen"
+               component={DataCollector}
+               options={{
+                  headerShown: false,
+               }}
+            />
+         </Stack.Navigator>
+      </NavigationContainer>
   );
 };
 
