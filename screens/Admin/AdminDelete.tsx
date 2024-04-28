@@ -1,39 +1,23 @@
 import React from 'react';
-import {
-   View,
-   Text,
-   TextInput,
-   StyleSheet,
-   Dimensions,
-   TouchableOpacity,
-} from 'react-native';
+import { View, Text, TextInput, StyleSheet, Dimensions, TouchableOpacity } from 'react-native';
 
 const windowWidth = Dimensions.get('window').width;
 
 const AdminDelete: React.FC = () => {
    return (
       <View style={styles.container}>
-         <Text style={styles.title}>Create Reference Points</Text>
+         <Text style={styles.title}>Delete Reference Points</Text>
          <View style={styles.inputContainer}>
-            <Text style={styles.inputLabel}>Point Name</Text>
+            <Text style={styles.inputLabel}>Grid ID</Text>
             <View style={styles.inputBox}>
                <TextInput
                   style={styles.input}
-                  placeholder="Enter the name of the reference point..."
-               />
-            </View>
-         </View>
-         <View style={styles.inputContainer}>
-            <Text style={styles.inputLabel}>Coordinates</Text>
-            <View style={styles.inputBox}>
-               <TextInput
-                  style={styles.input}
-                  placeholder="Enter the coordinates of the reference point..."
+                  placeholder="Enter the Grid ID of the reference point..."
                />
             </View>
          </View>
          <TouchableOpacity style={styles.button}>
-            <Text style={styles.buttonText}>CREATE</Text>
+            <Text style={styles.buttonText}>DELETE</Text>
          </TouchableOpacity>
       </View>
    );
@@ -74,7 +58,7 @@ const styles = StyleSheet.create({
       width: '100%',
       height: 50,
       paddingHorizontal: 20,
-      fontSize: 20,
+      fontSize: 14,
       fontWeight: 'bold',
       color: '#000',
    },
