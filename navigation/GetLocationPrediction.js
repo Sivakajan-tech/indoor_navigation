@@ -7,7 +7,7 @@ async function getLocationPrediction(currentWifiStrengths) {
     
     const train_data_set = test_data;
 
-    var knn = new KNN(train_data_set, test_labels, {k: 3}); // consider 2 nearest neighbors
+    var knn = new KNN(train_data_set, test_labels, {k: 2}); // consider 2 nearest neighbors
 
     var ans = knn.predict(currentWifiStrengths);
     console.log('ans =', ans);

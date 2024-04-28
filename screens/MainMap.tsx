@@ -11,7 +11,7 @@ setUpdateIntervalForType(SensorTypes.gyroscope, 100);
 
 
 const windowWidth = Dimensions.get('window').width;
-const windowHeight = Dimensions.get('window').height - 64;
+const windowHeight = Dimensions.get('window').height;
 
 const MainMap = () => {
    const [circles, setCircles] = useState([]);
@@ -77,12 +77,12 @@ const MainMap = () => {
 
    const [gridID, setgridID] = useState(87);
    const [horizontalLength, verticalLength] = calculateGridNumber(gridID);
-   const topOutterMap = 42;
-   const mapTopMargin = 31;
-   const mapLeftMargin = 20;
-
-   // let markerPosition = [mapLeftMargin + verticalLength + 8 -accelerometerData.x, topOutterMap + mapTopMargin + horizontalLength + 8-accelerometerData.y];
-   let markerPosition = [mapLeftMargin + verticalLength + 8, topOutterMap + mapTopMargin + horizontalLength + 8];
+   const topOutterMap = 76;
+   const mapTopMargin = 20;
+   const mapLeftMargin = 18;
+   
+   let markerPosition = [mapLeftMargin + verticalLength+5, topOutterMap + mapTopMargin + horizontalLength+5] ;
+  
    const [zoomLevel, setZoomLevel] = useState(1);
 
    useEffect(() => {
@@ -110,9 +110,9 @@ const MainMap = () => {
       getPredictedGrid();
 
       const interval = setInterval(() => {
-         getPredictedGrid();
-      }, 15000);
-
+        getPredictedGrid();
+      }, 3000);
+  
       return () => clearInterval(interval);
    }, []);
 
