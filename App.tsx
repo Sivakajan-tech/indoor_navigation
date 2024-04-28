@@ -1,10 +1,9 @@
 import React from 'react';
-import {NavigationContainer} from '@react-navigation/native';
-import {createStackNavigator} from '@react-navigation/stack';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
 
 import Welcome from './screens/Welcome';
 import MainMap from './screens/MainMap';
-
 import AdminLogin from './screens/Admin/AdminLogin';
 import AdminDashboard from './screens/Admin/AdminDashboard';
 import AdminCreate from './screens/Admin/AdminCreate';
@@ -15,8 +14,17 @@ import DataCollector from './add_data_point/dataCollectorScreen';
 
 const Stack = createStackNavigator();
 const App = () => {
-   return (
-      <NavigationContainer>
+  const linking = {
+    prefixes: ['pocketpath://'],
+    config: {
+      screens: {
+        Welcome: 'welcome',
+        MainMap:  'mainmap/:gridID',
+      }
+    },
+  };
+  return (
+    <NavigationContainer>
          <Stack.Navigator initialRouteName="Welcome">
             <Stack.Screen
                name="Welcome"
@@ -68,7 +76,7 @@ const App = () => {
             />
          </Stack.Navigator>
       </NavigationContainer>
-   );
+  );
 };
 
 export default App;
