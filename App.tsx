@@ -11,6 +11,7 @@ import AdminCreate from './screens/Admin/AdminCreate';
 import AdminView from './screens/Admin/AdminView';
 import AdminUpdate from './screens/Admin/AdminUpdate';
 import AdminDelete from './screens/Admin/AdminDelete';
+import DataCollector from './add_data_point/dataCollectorScreen';
 
 const Stack = createStackNavigator();
 const App = () => {
@@ -57,6 +58,16 @@ const App = () => {
             <Stack.Screen
                name="AdminDelete"
                component={AdminDelete}
+               options={{
+                  headerShown: false,
+               }}
+            />
+            <Stack.Screen
+               name="DataCollectorScreen"
+               component={DataCollector}
+               options={{
+                  headerShown: false,
+               }}
             />
          </Stack.Navigator>
       </NavigationContainer>
