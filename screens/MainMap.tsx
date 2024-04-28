@@ -1,49 +1,57 @@
-import React, {useState, useEffect,useMemo} from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import WifiReborn from 'react-native-wifi-reborn';
-import {getLocationPrediction} from '../navigation/GetLocationPrediction'
-import {graphJsonString} from '../navigation/constants';
-import {getWifiStrengths} from '../navigation/wifiRefinedInputUtil'
-import { accelerometer, gyroscope } from 'react-native-sensors';
+import { getLocationPrediction } from '../navigation/GetLocationPrediction'
+import { getWifiStrengths } from '../navigation/wifiRefinedInputUtil'
+import { accelerometer } from 'react-native-sensors';
 import { setUpdateIntervalForType, SensorTypes } from "react-native-sensors";
+import { View, Image, StyleSheet, Dimensions, Pressable, Text } from 'react-native';
 
 setUpdateIntervalForType(SensorTypes.accelerometer, 100);
 setUpdateIntervalForType(SensorTypes.gyroscope, 100);
 
-import {View, Image, StyleSheet, PanResponder,Dimensions} from 'react-native';
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height - 64;
 
 const MainMap = () => {
+   const [circles, setCircles] = useState([]);
+
    const [accelerometerData, setAccelerometerData] = useState({ x: 0, y: 0, z: 0 });
-  const [pointerPosition, setPointerPosition] = useState({ x: 0, y: 0 });
+   const [pointerPosition, setPointerPosition] = useState({ x: 0, y: 0 });
 
-  useEffect(() => {
-    const accelerometerSubscription = accelerometer.subscribe(({ x, y, z }) => {
-      setAccelerometerData({ x, y, z });
-    });
+   const addCircle = (event) => {
+      const [x, y] = [event.nativeEvent.locationX, event.nativeEvent.locationY];
+      const newCircle = { x, y };
+      setCircles([...circles, newCircle]);
+   };
 
-    return () => {
-      accelerometerSubscription.unsubscribe();
-    };
-  }, []);
+   const resetCircle = () => {
+      setCircles([]);
+   };
 
-  useEffect(() => {
-    const accelerometerX = accelerometerData.x;
-    const accelerometerY = accelerometerData.y;
+   useEffect(() => {
+      const accelerometerSubscription = accelerometer.subscribe(({ x, y, z }) => {
+         setAccelerometerData({ x, y, z });
+      });
 
-    // Adjust pointer position based on accelerometer data
-    const newX = pointerPosition.x + accelerometerX * 0.1; // Adjust the multiplier as needed
-    const newY = pointerPosition.y + accelerometerY * 0.1;
+      return () => {
+         accelerometerSubscription.unsubscribe();
+      };
+   }, []);
 
-    // Limit pointer position within screen bounds
-    const screenWidth = 300; // Adjust according to your screen width
-    const screenHeight = 500; // Adjust according to your screen height
-    const boundedX = Math.min(Math.max(newX, 0), screenWidth);
-    const boundedY = Math.min(Math.max(newY, 0), screenHeight);
+   useEffect(() => {
+      const accelerometerX = accelerometerData.x;
+      const accelerometerY = accelerometerData.y;
 
-    setPointerPosition({ x: boundedX, y: boundedY });
-  }, [accelerometerData]);
+      // Adjust pointer position based on accelerometer data
+      const newX = pointerPosition.x + accelerometerX * 0.1; // Adjust the multiplier as needed
+      const newY = pointerPosition.y + accelerometerY * 0.1;
+
+      const boundedX = Math.min(Math.max(newX, 0), windowWidth);
+      const boundedY = Math.min(Math.max(newY, 0), windowHeight);
+
+      setPointerPosition({ x: boundedX, y: boundedY });
+   }, [accelerometerData]);
 
    const calculateGridNumber = (squareId: number) => {
       const rows = 37; // Number of rows
@@ -66,57 +74,73 @@ const MainMap = () => {
    const topOutterMap = 42;
    const mapTopMargin = 31;
    const mapLeftMargin = 20;
-   
-   let markerPosition = [mapLeftMargin + verticalLength + 8, topOutterMap + mapTopMargin + horizontalLength + 8] ;
+
+   // let markerPosition = [mapLeftMargin + verticalLength + 8 -accelerometerData.x, topOutterMap + mapTopMargin + horizontalLength + 8-accelerometerData.y];
+   let markerPosition = [mapLeftMargin + verticalLength + 8, topOutterMap + mapTopMargin + horizontalLength + 8];
    const [zoomLevel, setZoomLevel] = useState(1);
 
    useEffect(() => {
       const getPredictedGrid = async () => {
-        let wifiStringName = [];
-        const wifiList = await WifiReborn?.loadWifiList();
-  
-        wifiList?.map(wifi => {
-          let wifiData = '';
-          wifiData += wifi.BSSID;
-          wifiData += '=';
-          wifiData += wifi.SSID;
-          wifiData += '=';
-          wifiData += wifi.level;
-          wifiStringName.push(wifiData);
-        });
-  
-        const currentWifiStrengths = getWifiStrengths(wifiStringName);
-        const gidId = await getLocationPrediction(currentWifiStrengths);
-        setgridID(gidId);
-        wifiStringName = [];
-        
+         let wifiStringName = [];
+         const wifiList = await WifiReborn?.loadWifiList();
+
+         wifiList?.map(wifi => {
+            let wifiData = '';
+            wifiData += wifi.BSSID;
+            wifiData += '=';
+            wifiData += wifi.SSID;
+            wifiData += '=';
+            wifiData += wifi.level;
+            wifiStringName.push(wifiData);
+         });
+
+         const currentWifiStrengths = getWifiStrengths(wifiStringName);
+         const gidId = await getLocationPrediction(currentWifiStrengths);
+         setgridID(gidId);
+         wifiStringName = [];
+
       };
-  
+
       getPredictedGrid();
-  
+
       const interval = setInterval(() => {
-        getPredictedGrid();
+         getPredictedGrid();
       }, 15000);
-  
+
       return () => clearInterval(interval);
-    }, []);
+   }, []);
 
 
    return (
       <View style={styles.container}>
-         <Image
-            source={require('../assets/FloorPlan.jpg')}
-            style={[styles.mapImage, { transform: [{ scale: zoomLevel }] }]}
-            resizeMode="contain"
-         />
-         {/* Draggable Marker */}
+         <Pressable onPress={resetCircle} style={styles.resetButton}>
+            <Text style={styles.resetText}>Reset</Text>
+         </Pressable>
+         <Pressable onPress={(evt) => addCircle(evt)} style={styles.mapImage}>
+            <Image
+               source={require('../assets/FloorPlan.jpg')}
+               style={[styles.mapImage, { transform: [{ scale: zoomLevel }] }]}
+               resizeMode="contain"
+            />
+         </Pressable>
+         {
+            circles.map((circle, index) => (
+               <View
+                  key={index}
+                  style={[
+                     styles.circle,
+                     { left: circle.x, top: circle.y },
+                  ]}
+               />
+            ))
+         }
          <View
             style={[
                styles.marker,
                { left: markerPosition[0], top: markerPosition[1] },
             ]}
          />
-      </View>
+      </View >
    );
 };
 
@@ -127,10 +151,32 @@ const styles = StyleSheet.create({
       alignItems: 'center',
       backgroundColor: '#FFD1E3',
    },
+   resetButton: {
+      position: 'absolute',
+      top: 20,
+      right: 20,
+      padding: 10,
+      backgroundColor: 'lightblue',
+      borderRadius: 5,
+      marginTop: -20,
+      zIndex: 1,
+   },
+   resetText: {
+      fontSize: 16,
+      color: 'white',
+   },
    mapImage: {
       width: '100%',
       height: '100%',
       position: 'absolute',
+   },
+   circle: {
+      width: 15,
+      height: 15,
+      borderRadius: 10,
+      borderColor: 'black',
+      position: 'absolute',
+      backgroundColor: 'lightgreen',
    },
    marker: {
       width: 5,
