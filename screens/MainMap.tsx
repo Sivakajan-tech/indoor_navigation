@@ -3,6 +3,11 @@ import WifiReborn from 'react-native-wifi-reborn';
 import {getLocationPrediction} from '../navigation/GetLocationPrediction'
 import {graphJsonString} from '../navigation/constants';
 import {getWifiStrengths} from '../navigation/wifiRefinedInputUtil'
+import { accelerometer, gyroscope } from 'react-native-sensors';
+import { setUpdateIntervalForType, SensorTypes } from "react-native-sensors";
+
+setUpdateIntervalForType(SensorTypes.accelerometer, 100);
+setUpdateIntervalForType(SensorTypes.gyroscope, 100);
 
 import {View, Image, StyleSheet, PanResponder,Dimensions} from 'react-native';
 
@@ -10,6 +15,36 @@ const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height - 64;
 
 const MainMap = () => {
+   const [accelerometerData, setAccelerometerData] = useState({ x: 0, y: 0, z: 0 });
+  const [pointerPosition, setPointerPosition] = useState({ x: 0, y: 0 });
+
+  useEffect(() => {
+    const accelerometerSubscription = accelerometer.subscribe(({ x, y, z }) => {
+      setAccelerometerData({ x, y, z });
+    });
+
+    return () => {
+      accelerometerSubscription.unsubscribe();
+    };
+  }, []);
+
+  useEffect(() => {
+    const accelerometerX = accelerometerData.x;
+    const accelerometerY = accelerometerData.y;
+
+    // Adjust pointer position based on accelerometer data
+    const newX = pointerPosition.x + accelerometerX * 0.1; // Adjust the multiplier as needed
+    const newY = pointerPosition.y + accelerometerY * 0.1;
+
+    // Limit pointer position within screen bounds
+    const screenWidth = 300; // Adjust according to your screen width
+    const screenHeight = 500; // Adjust according to your screen height
+    const boundedX = Math.min(Math.max(newX, 0), screenWidth);
+    const boundedY = Math.min(Math.max(newY, 0), screenHeight);
+
+    setPointerPosition({ x: boundedX, y: boundedY });
+  }, [accelerometerData]);
+
    const calculateGridNumber = (squareId: number) => {
       const rows = 37; // Number of rows
       const columns = 21; // Number of columns
