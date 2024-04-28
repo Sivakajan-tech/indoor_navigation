@@ -41,37 +41,22 @@ const App = () => {
             <Stack.Screen
                name="AdminDashboard"
                component={AdminDashboard}
-               options={{
-                  headerShown: false,
-               }}
             />
             <Stack.Screen
                name="AdminCreate"
                component={AdminCreate}
-               options={{
-                  headerShown: false,
-               }}
             />
             <Stack.Screen
                name="AdminView"
                component={AdminView}
-               options={{
-                  headerShown: false,
-               }}
             />
             <Stack.Screen
                name="AdminUpdate"
                component={AdminUpdate}
-               options={{
-                  headerShown: false,
-               }}
             />
             <Stack.Screen
                name="AdminDelete"
                component={AdminDelete}
-               options={{
-                  headerShown: false,
-               }}
             />
          </Stack.Navigator>
       </NavigationContainer>

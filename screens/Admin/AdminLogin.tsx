@@ -171,7 +171,7 @@ const styles = StyleSheet.create({
       width: '100%',
       height: 50,
       paddingHorizontal: 20,
-      fontSize: 20,
+      fontSize: 15,
       fontWeight: 'bold',
       color: '#000000',
    },
