@@ -12,7 +12,7 @@ import {
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 
-const Welcome: React.FC = ({navigation}) => {
+const Welcome: React.FC = ({ navigation }) => {
    const handleWelcomeButtonClick = () => {
       navigation.navigate('MainMap');
    };
