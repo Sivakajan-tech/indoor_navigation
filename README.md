@@ -1,7 +1,7 @@
 # PocketPath
 
 ## Introduction
-PocketPath is a smartphone-based indoor navigation solution, designed to provide users with convenience and user-friendly navigation within complex and large indoor environments.  App users can effortlessly search for their destination within the building, and the app offers the most convenient route to get there. Beyond this basic navigation, the app goes a step further by offering extra location details like operating hours, real-time updates like closures, blockages, or openings, and contact information enriching the indoor navigation experience. Moreover, users have the option to share their live location with others through a provided link, enhancing the app's functionality and user interaction.
+PocketPath is a smartphone-based indoor navigation solution, designed to provide users with convenience and user-friendly navigation within complex and large indoor environments.  With the help of this app, users can easily search for their destination within the building, locating both their destination and their current position. Additionally, users can choose to share their current position with others via a provided link, enriching the app's functionality and enhancing user engagement. This app utilizes Wi-Fi fingerprinting, IMU sensors, and a Machine Learning Model, ensuring highly accurate indoor location tracking.
 
 ## How to Setup the Environment
 
