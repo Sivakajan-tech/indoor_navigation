@@ -40,7 +40,7 @@ export default function IMUScreen({route}) {
    return (
       <View style={styles.container}>
          <View>
-            <Text style={styles.title}>Navigation</Text>
+            <Text style={styles.title}>Add Data Points</Text>
          </View>
          <View style={styles.inputContainer}>
             <View style={styles.inputBox}>
