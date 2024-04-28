@@ -1,5 +1,13 @@
 import React from 'react';
-import { View, Text, Button, Image, StyleSheet, Dimensions, TouchableOpacity } from 'react-native';
+import {
+   View,
+   Text,
+   Button,
+   Image,
+   StyleSheet,
+   Dimensions,
+   TouchableOpacity,
+} from 'react-native';
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
@@ -15,7 +23,9 @@ const Welcome: React.FC = ({ navigation }) => {
 
    return (
       <View style={styles.container}>
-         <TouchableOpacity style={styles.loginButton} onPress={handleLoginButtonClick}>
+         <TouchableOpacity
+            style={styles.loginButton}
+            onPress={handleLoginButtonClick}>
             <Text style={styles.loginButtonText}>Admin</Text>
          </TouchableOpacity>
          <View style={styles.imageContainer}>
