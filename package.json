@@ -13,11 +13,21 @@
     "@react-navigation/native": "^6.1.14",
     "@react-navigation/native-stack": "^6.9.22",
     "@react-navigation/stack": "^6.3.25",
+    "ml-knn": "^3.0.0",
+    "ngraph.fromjson": "^3.1.0",
+    "ngraph.tojson": "^1.2.0",
     "react": "18.2.0",
     "react-native": "0.73.5",
     "react-native-gesture-handler": "^2.15.0",
+    "react-native-paper": "^5.12.3",
     "react-native-safe-area-context": "^4.9.0",
-    "react-native-screens": "^3.29.0"
+    "react-native-screens": "^3.29.0",
+    "react-native-sensors": "^7.3.6",
+    "react-native-svg": "^15.2.0",
+    "react-native-svg-pan-zoom": "^0.1.2",
+    "react-native-vector-icons": "^10.0.3",
+    "react-native-wifi-reborn": "^4.12.1",
+    "rn-fetch-blob": "^0.12.0"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",

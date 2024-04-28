@@ -5,6 +5,14 @@ import { createStackNavigator } from '@react-navigation/stack';
 import Welcome from './screens/Welcome';
 import MainMap from './screens/MainMap';
 
+import AdminLogin from './screens/Admin/AdminLogin';
+import AdminDashboard from './screens/Admin/AdminDashboard';
+import AdminCreate from './screens/Admin/AdminCreate';
+import AdminView from './screens/Admin/AdminView';
+import AdminUpdate from './screens/Admin/AdminUpdate';
+import AdminDelete from './screens/Admin/AdminDelete';
+import DataCollector from './add_data_point/dataCollectorScreen';
+
 const Stack = createStackNavigator();
 const App = () => {
   const linking = {

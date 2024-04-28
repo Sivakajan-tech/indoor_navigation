@@ -1,5 +1,13 @@
 import React from 'react';
-import {View, Text, Button, Image, StyleSheet, Dimensions} from 'react-native';
+import {
+   View,
+   Text,
+   Button,
+   Image,
+   StyleSheet,
+   Dimensions,
+   TouchableOpacity,
+} from 'react-native';
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
@@ -8,8 +16,18 @@ const Welcome: React.FC = ({navigation}) => {
    const handleWelcomeButtonClick = () => {
       navigation.navigate('MainMap');
    };
+
+   const handleLoginButtonClick = () => {
+      navigation.navigate('AdminLogin');
+   };
+
    return (
       <View style={styles.container}>
+         <TouchableOpacity
+            style={styles.loginButton}
+            onPress={handleLoginButtonClick}>
+            <Text style={styles.loginButtonText}>Admin</Text>
+         </TouchableOpacity>
          <View style={styles.imageContainer}>
             <Image
                source={require('../assets/GPS-navigation-apps-2.png')}
@@ -38,6 +56,20 @@ const styles = StyleSheet.create({
    container: {
       flex: 1,
       backgroundColor: '#9d54bf',
+      position: 'relative',
+   },
+   loginButton: {
+      position: 'absolute',
+      top: 20,
+      right: 20,
+      padding: 10,
+      backgroundColor: '#fff',
+      borderRadius: 10,
+   },
+   loginButtonText: {
+      fontSize: 16,
+      fontWeight: 'bold',
+      color: '#000',
    },
    imageContainer: {
       flex: 1,
