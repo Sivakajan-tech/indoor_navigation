@@ -3,8 +3,12 @@ import WifiReborn from 'react-native-wifi-reborn';
 import { getLocationPrediction } from '../navigation/GetLocationPrediction'
 import { getWifiStrengths } from '../navigation/wifiRefinedInputUtil'
 import { accelerometer } from 'react-native-sensors';
+import { Provider } from  'react-native-paper';
 import { setUpdateIntervalForType, SensorTypes } from "react-native-sensors";
 import { View, Image, StyleSheet, Dimensions, Pressable, Text, Share } from 'react-native';
+import DropDown from 'react-native-paper-dropdown';
+import {navigableOptions} from '../navigation/constants';
+
 
 setUpdateIntervalForType(SensorTypes.accelerometer, 100);
 setUpdateIntervalForType(SensorTypes.gyroscope, 100);
@@ -25,6 +29,7 @@ const MainMap = () => {
       setCircles([...circles, newCircle]);
    };
 
+
    const shareInput = (gridID) => () => {
       Share.share({
          message: "pocketpath://mainmap?gridID=" + gridID,
@@ -33,6 +38,7 @@ const MainMap = () => {
 
    const resetCircle = () => {
       setCircles([]);
+      setDropDownStartValue(0);
    };
 
    useEffect(() => {
@@ -75,13 +81,19 @@ const MainMap = () => {
       return [horizontalLength, verticalLength];
    };
 
+   const [dropDownStartValue, setDropDownStartValue] = useState(0);
+
    const [gridID, setgridID] = useState(87);
    const [horizontalLength, verticalLength] = calculateGridNumber(gridID);
+   const [horizontalLength2, verticalLength2] = calculateGridNumber(dropDownStartValue);
    const topOutterMap = 76;
    const mapTopMargin = 20;
    const mapLeftMargin = 18;
+
+   const [showDropDownStart, setShowDropDownStart] = useState(false);
    
    let markerPosition = [mapLeftMargin + verticalLength+5, topOutterMap + mapTopMargin + horizontalLength+5] ;
+   let destMarkerPosition = [mapLeftMargin + verticalLength2+5, topOutterMap + mapTopMargin + horizontalLength2+5] ;
   
    const [zoomLevel, setZoomLevel] = useState(1);
 
@@ -118,8 +130,21 @@ const MainMap = () => {
 
 
    return (
+      <Provider>
       <View style={styles.container}>
-         <View style={{ position: 'absolute', top:2,right:2}} >
+         <View style={{ position: 'absolute', top:12,left:15, zIndex:1, width:'60%'}} >
+            <DropDown 
+               label={'Select Destination'}
+               mode={'outlined'}
+               visible={showDropDownStart}
+               showDropDown={() => setShowDropDownStart(true)}
+               onDismiss={() => setShowDropDownStart(false)}
+               value={dropDownStartValue}
+               setValue={setDropDownStartValue}
+               list={navigableOptions}
+            />
+         </View>
+         <View style={{ position: 'absolute', top:12,right:2}} >
             <Pressable onPress={shareInput(gridID)} style={styles.shareButton}>
                <Text style={styles.shareText}>Share</Text>
             </Pressable>
@@ -151,7 +176,18 @@ const MainMap = () => {
                { left: markerPosition[0], top: markerPosition[1] },
             ]}
          />
+         {dropDownStartValue!=0 ? (
+          <View
+          style={[
+             styles.marker2,
+             { left: destMarkerPosition[0], top: destMarkerPosition[1] },
+          ]}
+       />
+        ) : null}
+
+         
       </View >
+      </Provider>
    );
 };
 
@@ -165,7 +201,7 @@ const styles = StyleSheet.create({
    resetButton: {
       position: 'absolute',
       top: 20,
-      right: 20,
+      right: 10,
       padding: 8,
       backgroundColor: 'lightblue',
       borderRadius: 5,
@@ -173,7 +209,7 @@ const styles = StyleSheet.create({
       zIndex: 1,
    },
    resetText: {
-      fontSize: 10,
+      fontSize: 15,
       color: 'white',
    },
    mapImage: {
@@ -196,6 +232,14 @@ const styles = StyleSheet.create({
       backgroundColor: 'red',
       position: 'absolute',
    },
+
+   marker2: {
+      width: 15,
+      height: 15,
+      borderRadius: 10,
+      backgroundColor: 'blue',
+      position: 'absolute',
+   },
    shareButton: {
       position: 'absolute',
       top: 20,
@@ -208,7 +252,7 @@ const styles = StyleSheet.create({
       marginVertical:-10
    },
    shareText: {
-      fontSize: 10,
+      fontSize: 15,
       color: 'white',
    },
 });
