@@ -21,6 +21,11 @@ const AdminDashboard: React.FC = ({ navigation }) => {
       navigation.navigate('AdminUpdate');
    };
 
+   const handleAddDataPoints = () => {
+      navigation.navigate('DataCollectorScreen');
+   };
+
+
    const handleNavigateHome = () => {
       setIsMenuOpen(false);
       Alert.alert(
@@ -79,6 +84,9 @@ const AdminDashboard: React.FC = ({ navigation }) => {
        <TouchableOpacity style={styles.option} onPress={handleUpdateReferencePoints}>
           <Text style={styles.optionText}>Update Reference Points</Text>
        </TouchableOpacity>
+       <TouchableOpacity style={styles.option} onPress={handleAddDataPoints}>
+            <Text style={styles.optionText}>Add Data Points</Text>
+         </TouchableOpacity>
     </View>
  );
 };

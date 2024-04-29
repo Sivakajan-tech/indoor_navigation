@@ -70,9 +70,6 @@ const App = () => {
             <Stack.Screen
                name="DataCollectorScreen"
                component={DataCollector}
-               options={{
-                  headerShown: false,
-               }}
             />
          </Stack.Navigator>
       </NavigationContainer>
