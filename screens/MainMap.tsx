@@ -92,7 +92,7 @@ const MainMap = () => {
 
    const [showDropDownStart, setShowDropDownStart] = useState(false);
    
-   let markerPosition = [mapLeftMargin + verticalLength+5, topOutterMap + mapTopMargin + horizontalLength+5] ;
+   let markerPosition = [mapLeftMargin + verticalLength+5+accelerometerData.x, topOutterMap + mapTopMargin + horizontalLength+5+accelerometerData.y] ;
    let destMarkerPosition = [mapLeftMargin + verticalLength2+5, topOutterMap + mapTopMargin + horizontalLength2+5] ;
   
    const [zoomLevel, setZoomLevel] = useState(1);
@@ -226,8 +226,8 @@ const styles = StyleSheet.create({
       backgroundColor: 'lightgreen',
    },
    marker: {
-      width: 5,
-      height: 5,
+      width:12,
+      height: 12,
       borderRadius: 10,
       backgroundColor: 'red',
       position: 'absolute',
