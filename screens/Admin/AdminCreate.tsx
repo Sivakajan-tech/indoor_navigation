@@ -1,19 +1,25 @@
 import React from 'react';
-import {
-   View,
-   Text,
-   TextInput,
-   StyleSheet,
-   Dimensions,
-   TouchableOpacity,
-} from 'react-native';
+import { View, Text, TextInput, StyleSheet, Dimensions, TouchableOpacity } from 'react-native';
 
 const windowWidth = Dimensions.get('window').width;
 
-const AdminCreate: React.FC = () => {
+const AdminCreate: React.FC = ({navigation}) => {
+   const handleAdminCreateButtonClick = () => {
+      navigation.navigate('AdminDashboard');
+   };
+
    return (
       <View style={styles.container}>
          <Text style={styles.title}>Create Reference Points</Text>
+         <View style={styles.inputContainer}>
+            <Text style={styles.inputLabel}>Grid ID</Text>
+            <View style={styles.inputBox}>
+               <TextInput
+                  style={styles.input}
+                  placeholder="Enter the Grid ID..."
+               />
+            </View>
+         </View>
          <View style={styles.inputContainer}>
             <Text style={styles.inputLabel}>Point Name</Text>
             <View style={styles.inputBox}>
@@ -24,15 +30,24 @@ const AdminCreate: React.FC = () => {
             </View>
          </View>
          <View style={styles.inputContainer}>
-            <Text style={styles.inputLabel}>Grid</Text>
+            <Text style={styles.inputLabel}>Contact Number</Text>
             <View style={styles.inputBox}>
                <TextInput
                   style={styles.input}
-                  placeholder="Enter the grid of the reference point..."
+                  placeholder="Enter the contact number..."
                />
             </View>
          </View>
-         <TouchableOpacity style={styles.button}>
+         <View style={styles.inputContainer}>
+            <Text style={styles.inputLabel}>Operating Hours</Text>
+            <View style={styles.inputBox}>
+               <TextInput
+                  style={styles.input}
+                  placeholder="Enter the operating hours..."
+               />
+            </View>
+         </View>
+         <TouchableOpacity style={styles.button} onPress={handleAdminCreateButtonClick}>
             <Text style={styles.buttonText}>CREATE</Text>
          </TouchableOpacity>
       </View>
@@ -68,13 +83,13 @@ const styles = StyleSheet.create({
       borderRadius: 10,
       borderColor: '#fff',
       backgroundColor: '#fff',
-      marginBottom: 25,
+      marginBottom: 10,
    },
    input: {
       width: '100%',
       height: 50,
       paddingHorizontal: 20,
-      fontSize: 20,
+      fontSize: 15,
       fontWeight: 'bold',
       color: '#000',
    },

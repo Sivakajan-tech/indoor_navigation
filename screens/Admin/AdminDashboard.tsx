@@ -1,8 +1,8 @@
-import React, {useState} from 'react';
-import {View, Text, TouchableOpacity, StyleSheet, Alert} from 'react-native';
-import {BackHandler} from 'react-native';
+import React, { useState } from 'react';
+import { View, Text, TouchableOpacity, StyleSheet, Alert } from 'react-native';
+import { BackHandler } from 'react-native';
 
-const AdminDashboard: React.FC = ({navigation}) => {
+const AdminDashboard: React.FC = ({ navigation }) => {
    const [isMenuOpen, setIsMenuOpen] = useState(false);
 
    const handleCreateReferencePoint = () => {
@@ -21,24 +21,16 @@ const AdminDashboard: React.FC = ({navigation}) => {
       navigation.navigate('AdminUpdate');
    };
 
-   const handleAddDataPoints = () => {
-      navigation.navigate('DataCollectorScreen');
-   };
-
    const handleNavigateHome = () => {
       setIsMenuOpen(false);
       Alert.alert(
          'Confirm',
          'Are you sure you want to Return to the Home Page ?',
          [
-            {
-               text: 'Cancel',
-               onPress: () => console.log('Cancel Pressed'),
-               style: 'cancel',
-            },
-            {text: 'OK', onPress: () => navigation.navigate('Welcome')},
+            { text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel' },
+            { text: 'OK', onPress: () => navigation.navigate('Welcome') },
          ],
-         {cancelable: false},
+         { cancelable: false }
       );
    };
 
@@ -48,72 +40,47 @@ const AdminDashboard: React.FC = ({navigation}) => {
          'Confirm',
          'Are you sure you want to Exit the Application ?',
          [
-            {
-               text: 'Cancel',
-               onPress: () => console.log('Cancel Pressed'),
-               style: 'cancel',
-            },
-            {text: 'OK', onPress: () => BackHandler.exitApp()},
+            { text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel' },
+            { text: 'OK', onPress: () => BackHandler.exitApp() },
          ],
-         {cancelable: false},
+         { cancelable: false }
       );
    };
 
    return (
-      <View style={styles.container}>
-         <TouchableOpacity
-            style={styles.menuButton}
-            onPress={() => setIsMenuOpen(!isMenuOpen)}>
-            <Text style={styles.menuButtonText}>Menu</Text>
-         </TouchableOpacity>
-         {isMenuOpen && (
-            <View style={styles.menu}>
-               <TouchableOpacity
-                  style={styles.menuOption}
-                  onPress={handleNavigateHome}>
-                  <Text style={styles.menuOptionText}>Home</Text>
-               </TouchableOpacity>
-               <TouchableOpacity
-                  style={styles.menuOption}
-                  onPress={handleExitApp}>
-                  <Text style={styles.menuOptionText}>Exit</Text>
-               </TouchableOpacity>
-            </View>
-         )}
-         <View style={styles.welcomeContainer}>
-            <Text style={styles.welcomeText}>Hello Admin !!!</Text>
-            <Text style={styles.descriptionText}>
-               Welcome to Indoor Navigation App :-)
-            </Text>
-            <Text style={styles.descriptionText}>
-               Feel Free to Modify the App !!
-            </Text>
+    <View style={styles.container}>
+       <TouchableOpacity style={styles.menuButton} onPress={() => setIsMenuOpen(!isMenuOpen)}>
+          <Text style={styles.menuButtonText}>Menu</Text>
+       </TouchableOpacity>
+       {isMenuOpen && (
+         <View style={styles.menu}>
+            <TouchableOpacity style={styles.menuOption} onPress={handleNavigateHome}>
+               <Text style={styles.menuOptionText}>Home</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.menuOption} onPress={handleExitApp}>
+               <Text style={styles.menuOptionText}>Exit</Text>
+            </TouchableOpacity>
          </View>
-         <TouchableOpacity
-            style={styles.option}
-            onPress={handleCreateReferencePoint}>
-            <Text style={styles.optionText}>Create Reference Point</Text>
-         </TouchableOpacity>
-         <TouchableOpacity
-            style={styles.option}
-            onPress={handleViewReferencePoints}>
-            <Text style={styles.optionText}>View Reference Points</Text>
-         </TouchableOpacity>
-         <TouchableOpacity
-            style={styles.option}
-            onPress={handleDeleteReferencePoints}>
-            <Text style={styles.optionText}>Delete Reference Points</Text>
-         </TouchableOpacity>
-         <TouchableOpacity
-            style={styles.option}
-            onPress={handleUpdateReferencePoints}>
-            <Text style={styles.optionText}>Update Reference Points</Text>
-         </TouchableOpacity>
-         <TouchableOpacity style={styles.option} onPress={handleAddDataPoints}>
-            <Text style={styles.optionText}>Add Data Points</Text>
-         </TouchableOpacity>
-      </View>
-   );
+       )}
+       <View style={styles.welcomeContainer}>
+          <Text style={styles.welcomeText}>Hello Admin !!!</Text>
+          <Text style={styles.descriptionText}>Welcome to Indoor Navigation App :-)</Text>
+          <Text style={styles.descriptionText}>Feel Free to Modify the App !!</Text>
+       </View>
+       <TouchableOpacity style={styles.option} onPress={handleCreateReferencePoint}>
+          <Text style={styles.optionText}>Create Reference Point</Text>
+       </TouchableOpacity>
+       <TouchableOpacity style={styles.option} onPress={handleViewReferencePoints}>
+          <Text style={styles.optionText}>View Reference Points</Text>
+       </TouchableOpacity>
+       <TouchableOpacity style={styles.option} onPress={handleDeleteReferencePoints}>
+          <Text style={styles.optionText}>Delete Reference Points</Text>
+       </TouchableOpacity>
+       <TouchableOpacity style={styles.option} onPress={handleUpdateReferencePoints}>
+          <Text style={styles.optionText}>Update Reference Points</Text>
+       </TouchableOpacity>
+    </View>
+ );
 };
 
 const styles = StyleSheet.create({
@@ -170,7 +137,7 @@ const styles = StyleSheet.create({
       color: '#000000',
    },
    option: {
-      padding: 8,
+      padding: 15,
       backgroundColor: '#fff',
       marginTop: 20,
       borderRadius: 10,
